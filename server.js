@@ -26,6 +26,8 @@ wss.on('connection', (ws) => {
         console.log('received: %s', message);
         ws.send(`Hello, you sent -> ${message}`);
     })
+	
+	ws.send(`${sendJSON}`)
 
     intervalListener=setInterval(
 	    () => {
