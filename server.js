@@ -1,15 +1,22 @@
-const express = require('express')
-const http = require('http')
+const express 	= require('express')
+const   cors 	= require('cors')
+const http 		= require('http')
 const WebSocket = require('ws')
 
 // let sendJSON =require('./productionJSON')
 let sendJSON =require('./test')
-var intervalListener
+let intervalListener
 
 sendJSON=JSON.stringify(sendJSON)
 
 
 const app = express()
+app.use(cors())
+
+app.post('/api/auth', (req, res)=>{
+	res.send("ok")
+})
+
 
 //initialize a simple http server
 const server = http.createServer(app)
