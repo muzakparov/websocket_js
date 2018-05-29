@@ -1,5 +1,5 @@
 const express 	= require('express')
-const   cors 	= require('cors')
+const cors   	= require('cors')
 const http 		= require('http')
 const WebSocket = require('ws')
 
@@ -27,18 +27,18 @@ const wss = new WebSocket.Server({ server })
 wss.on('connection', (ws) => {
 
     //connection is up, let's add a simple simple event
-    ws.on('message', (message) => {
+    // ws.on('message', (message) => {
 
-        //log the received message and send it back to the client
-        console.log('received: %s', message);
-        ws.send(`Hello, you sent -> ${message}`);
-    })
+    //     //log the received message and send it back to the client
+    //     console.log('received: %s', message);
+    //     ws.send(`Hello, you sent -> ${message}`);
+    // })
 	
 	ws.send(`${sendJSON}`)
 
     intervalListener=setInterval(
 	    () => {
-	    	console.log("polling...")
+	    	// console.log("polling...")
 
 	    	if (ws.readyState != WebSocket.CLOSED) { 
 				ws.send(`${sendJSON}`)
@@ -53,6 +53,10 @@ wss.on('close', function close() {
   console.log('disconnected');
 
   clearInterval(intervalListener)
+})
+
+app.get('/', function (req, res) {
+    res.sendFile(__dirname + '/ws.html');
 })
 
 //start our server
